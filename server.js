@@ -1,7 +1,8 @@
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
-const expoKeyRouter = require("./routers/expoKeysRouter");
+const expoTokenRouter = require("./routers/expoTokenRouter");
+const expoNotificationRouter = require("./routers/expoNotificationRouter");
 
 function createServer() {
     const app = express();
@@ -10,7 +11,8 @@ function createServer() {
     app.use(cors({ "origin": "*" }));
     app.use(express.json());
 
-    app.use("/api/expokeys", expoKeyRouter);
+    app.use("/api/expotoken", expoTokenRouter);
+    app.use("/api/exponotification", expoNotificationRouter);
 
     return app;
 }
