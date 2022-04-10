@@ -1,4 +1,5 @@
 const ExpoToken = require("../models/expoToken");
+const { Expo } = require('expo-server-sdk')
 
 // get all expo keys
 exports.getAllExpoTokens = async (req, res) => {
@@ -14,8 +15,15 @@ exports.getAllExpoTokens = async (req, res) => {
 // save key
 exports.saveExpoToken = async (req, res) => {
     try {
+        const token = req.body.token;
+
+        // validate the token
+        if (!Expo.isExpoPushToken(token)) {
+            return res.status(400).send(`Push token ${token} is not a valid Expo push token`)
+        }
+
         const expoToken = new ExpoToken({
-            token: req.body.token
+            token: token
         });
 
         await expoToken.save().then(savedToken => {

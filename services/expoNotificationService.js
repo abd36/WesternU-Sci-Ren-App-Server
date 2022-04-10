@@ -37,12 +37,6 @@ async function getAllExpoTokens() {
 
     await ExpoKey.find().then(expoTokens => {
         for (let expoToken of expoTokens) {
-            // validate the token
-            if (!Expo.isExpoPushToken(expoToken.token)) {
-                console.error(`Push token ${expoToken.token} is not a valid Expo push token`);
-                continue
-            }
-
             tokens.push(expoToken.token);
         }
     });
