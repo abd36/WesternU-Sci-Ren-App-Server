@@ -1,4 +1,3 @@
-const res = require("express/lib/response");
 const ExpoKey = require("../models/expoKey")
 
 // get all expo keys
