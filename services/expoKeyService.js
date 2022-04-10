@@ -28,7 +28,7 @@ exports.saveExpoKey = async (req, res) => {
 }
 
 // delete key by id
-exports.saveExpoKey = async (req, res) => {
+exports.deleteExpoKey = async (req, res) => {
     try {
         const id = req.body.id;
         let expoKey = await ExpoKey.findById(id);
