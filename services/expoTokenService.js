@@ -12,7 +12,7 @@ exports.getAllExpoTokens = async (req, res) => {
     }
 }
 
-// save key
+// save keys
 exports.saveExpoToken = async (req, res) => {
     try {
         const token = req.body.token;
