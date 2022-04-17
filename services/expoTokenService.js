@@ -22,12 +22,18 @@ exports.saveExpoToken = async (req, res) => {
             return res.status(400).send(`Push token ${token} is not a valid Expo push token`)
         }
 
-        const expoToken = new ExpoToken({
-            token: token
-        });
-
-        await expoToken.save().then(savedToken => {
-            return res.status(201).json(savedToken);
+        ExpoToken.findOne({ token: token }).then(existingToken => {
+            if (existingToken) {
+                return res.status(200).json(existingToken);
+            } else {
+                const expoToken = new ExpoToken({
+                    token: token
+                });
+        
+                expoToken.save().then(savedToken => {
+                    return res.status(201).json(savedToken);
+                });
+            }
         });
     } catch (error) {
         return res.status(500).send(error.message);
